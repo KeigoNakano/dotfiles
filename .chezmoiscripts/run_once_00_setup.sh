@@ -1,9 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# 最小限の依存関係のみインストール
 if command -v apt-get >/dev/null 2>&1; then
-    sudo apt-get update && sudo apt-get install -y curl git build-essential || true
+    sudo apt-get update || apt-get update
+    sudo apt-get install -y zsh git curl build-essential || \
+         apt-get install -y zsh git curl build-essential
 fi
 
 # Miseのパスを通す
