@@ -1,0 +1,18 @@
+# Mise本体
+[".local/bin/mise"]
+type = "file"
+url = "https://mise.jdx.dev/mise-latest-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+executable = true
+
+# LazyVim
+[".config/nvim"]
+type = "archive"
+url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+exclude = ["**/lua/config/options.lua"]  # カスタムoptions.luaは除外
+
+# fzf-tab
+[".config/zsh/fzf-tab"]
+type = "archive"
+url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
+stripComponents = 1
