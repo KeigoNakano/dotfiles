@@ -22,3 +22,27 @@ type = "archive"
 url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
 stripComponents = 1
 refreshPeriod = "720h"  # 30日ごと
+
+# zsh-autosuggestions
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+type = "archive"
+url = "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
+stripComponents = 1
+
+# zsh-syntax-highlighting
+[".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+type = "archive"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
+stripComponents = 1
+
+# zsh-vi-mode
+[".oh-my-zsh/custom/plugins/zsh-vi-mode"]
+type = "archive"
+url = "https://github.com/jeffreytse/zsh-vi-mode/archive/master.tar.gz"
+stripComponents = 1
+
+# fzf-tab（既に設定済みかもしれませんが、Oh My Zsh用に）
+[".oh-my-zsh/custom/plugins/fzf-tab"]
+type = "archive"
+url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
+stripComponents = 1
