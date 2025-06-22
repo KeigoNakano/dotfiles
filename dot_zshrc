@@ -139,7 +139,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 export PATH=$PATH:/mnt/c/Windows/System32
-export FZF_DEFAULT_COMMAND='fdfind --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export PATH="$HOME/bin:$PATH"
 
 # alias
@@ -177,3 +177,5 @@ eval "$(dircolors -b)"  # デフォルトのLS_COLORSを設定
 export LS_COLORS="${LS_COLORS}:ow=34:tw=34"  # 背景色を削除 
 # 補完の色設定
 zstyle ':completion:*' list-colors 'ow=34:tw=34'
+# zoxideの初期化
+eval "$(zoxide init zsh)"
