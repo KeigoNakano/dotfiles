@@ -147,7 +147,7 @@ alias fcode='fzf | xargs code'
 alias fcd='cd $(dirname $(fzf))'
 # alias v=nvim
 alias gp="git pull"
-# alias lg=lazygit
+alias lg=lazygit
 alias cl=clear
 if command -v bat > /dev/null ; then
   alias cat="bat"
@@ -179,3 +179,9 @@ export LS_COLORS="${LS_COLORS}:ow=34:tw=34"  # 背景色を削除
 zstyle ':completion:*' list-colors 'ow=34:tw=34'
 # zoxideの初期化
 eval "$(zoxide init zsh)"
+
+# Docker環境で色の表現数が少ないせいで補完がグレーに表示されない問題を解消
+if [[ "$TERM" == "xterm" ]]; then
+    export TERM=xterm-256color
+fi
+
