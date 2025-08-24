@@ -15,17 +15,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-PURE_GIT_PULL=0
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  fpath+=("$(brew --prefix)/share/zsh/site-functions")
-else
-  fpath+=($HOME/.zsh/pure)
-fi
-
-autoload -U promptinit; promptinit
-
-prompt pure
+ZSH_THEME="robbyrussell"
 
 bindkey -v
 export KEYTIMEOUT=1 # make switching between modes faster
@@ -172,11 +163,31 @@ enable-fzf-tab
 eval "$(mise activate zsh)"
 export BAT_THEME="Monokai Extended"
 
-# デフォルトのLS_COLORSを取得して、問題のある部分だけ上書き
-eval "$(dircolors -b)"  # デフォルトのLS_COLORSを設定
-export LS_COLORS="${LS_COLORS}:ow=34:tw=34"  # 背景色を削除 
-# 補完の色設定
-zstyle ':completion:*' list-colors 'ow=34:tw=34'
+# ファイルタイプ別の色設定（OS別対応）
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS用の設定
+export CLICOLOR=1
+export LSCOLORS="GxFxCxDxBxegedabagaced"
+# GNU ls (gls) がインストールされている場合
+if command -v gdircolors &> /dev/null; then
+    eval "$(gdircolors -b)"
+    export LS_COLORS="${LS_COLORS}:ow=34:tw=34"
+fi
+{{ else -}}
+# Linux/WSL用の設定
+if command -v dircolors &> /dev/null; then
+    eval "$(dircolors -b)"
+    export LS_COLORS="${LS_COLORS}:ow=34:tw=34"
+fi
+{{ end -}}
+# 補完の色設定（全OS共通）
+if [[ -n "$LS_COLORS" ]]; then
+    zstyle ':completion:' list-colors "${(s.:.)LS_COLORS}"
+else
+    # LS_COLORSが設定されていない場合の最小限の設定
+    zstyle ':completion:' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:ow=34:tw=34'
+fi
+
 # zoxideの初期化
 eval "$(zoxide init zsh)"
 
