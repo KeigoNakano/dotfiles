@@ -1,8 +1,12 @@
 # Mise本体
 [".local/bin/mise"]
-type = "file"
-url = "https://mise.jdx.dev/mise-latest-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
-executable = true
+    type = "file"
+    {{- $os := .chezmoi.os }}
+    {{- if eq .chezmoi.os "darwin" }}
+    {{-   $os = "macos" }}
+    {{- end }}
+    url = {{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-%s" $os .chezmoi.arch) | quote }}
+    executable = true
 
 # LazyVim
 [".config/nvim"]
@@ -46,3 +50,4 @@ stripComponents = 1
 type = "archive"
 url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
 stripComponents = 1
+
