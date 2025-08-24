@@ -135,10 +135,12 @@ export PATH="$HOME/bin:$PATH"
 
 # alias
 alias fcode='fzf | xargs code'
-alias fcd='cd $(dirname $(fzf))'
+alias fcd='eval "$(~/bin/0-cd)"'
+alias fcdf='cd $(dirname $(fzf))'
 # alias v=nvim
 alias gp="git pull"
-alias lg=lazygit
+# lazygitよりVSCodeのほうがGit機能シンプルで使用しやすい
+# alias lg=lazygit
 alias cl=clear
 if command -v bat > /dev/null ; then
   alias cat="bat"
