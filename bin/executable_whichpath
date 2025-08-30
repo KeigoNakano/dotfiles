@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # whichpath - Find all locations of a command in PATH
 
 if [ -z "$1" ]; then
-    echo "Usage: $(basename "$0") <command>"
-    echo "Find all locations of a command in PATH"
-    exit 1
+  echo "Usage: $(basename "$0") <command>"
+  echo "Find all locations of a command in PATH"
+  exit 1
 fi
 
 cmd="$1"
@@ -12,19 +12,23 @@ echo "Searching for '$cmd' in PATH..."
 
 # Check if command exists
 if ! command -v "$cmd" >/dev/null 2>&1; then
-    echo "✗ Not found in PATH"
-    exit 1
+  echo "✗ Not found in PATH"
+  exit 1
 fi
 
 # Show all locations
 first=true
-echo -e "${PATH//:/\\n}" | while read -r dir; do
-    if [ -x "$dir/$cmd" ]; then
-        if [ "$first" = true ]; then
-            echo "✓ $dir/$cmd  ← This will be used"
-            first=false
-        else
-            echo "  $dir/$cmd"
-        fi
+
+# zsh用の配列読み込み
+IFS=':' read -A path_dirs <<<"$PATH"
+
+for dir in "${path_dirs[@]}"; do
+  if [ -x "$dir/$cmd" ]; then
+    if [ "$first" = true ]; then
+      echo "✓ $dir/$cmd  ← This will be used"
+      first=false
+    else
+      echo "  $dir/$cmd"
     fi
+  fi
 done
