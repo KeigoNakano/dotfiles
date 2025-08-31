@@ -15,12 +15,6 @@ url = "https://github.com/LazyVim/starter/archive/refs/heads/main.tar.gz"
 stripComponents = 1
 exclude = ["**/lua/config/options.lua"]  # カスタムoptions.luaは除外
 
-# fzf-tab
-[".config/zsh/fzf-tab"]
-type = "archive"
-url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
-stripComponents = 1
-
 [".oh-my-zsh"]
 type = "archive"
 url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
@@ -45,7 +39,7 @@ type = "archive"
 url = "https://github.com/jeffreytse/zsh-vi-mode/archive/master.tar.gz"
 stripComponents = 1
 
-# fzf-tab（既に設定済みかもしれませんが、Oh My Zsh用に）
+# fzf-tab
 [".oh-my-zsh/custom/plugins/fzf-tab"]
 type = "archive"
 url = "https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz"
