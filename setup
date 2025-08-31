@@ -1,0 +1,62 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "Setting up complete dotfiles environment..."
+
+# OS判定
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    OS="macos"
+elif command -v apt-get >/dev/null; then
+    OS="ubuntu"
+else
+    echo "Unsupported OS. Only macOS and Ubuntu are supported."
+    exit 1
+fi
+
+echo "Detected OS: $OS"
+
+# 基本パッケージのインストール
+if [[ "$OS" == "macos" ]]; then
+    if command -v brew >/dev/null; then
+        echo "Installing packages with Homebrew..."
+        brew install zsh git curl
+    else
+        echo "Homebrew not found. Please install Homebrew first."
+        exit 1
+    fi
+elif [[ "$OS" == "ubuntu" ]]; then
+    echo "Installing packages with apt..."
+    sudo apt-get update && sudo apt-get install -y zsh git curl build-essential
+fi
+
+# zshをデフォルトシェルに設定
+if command -v zsh >/dev/null && [[ "$SHELL" != "$(command -v zsh)" ]]; then
+    echo "Changing default shell to zsh..."
+    sudo chsh -s "$(command -v zsh)" "$USER"
+fi
+
+# chezmoiのインストールと適用
+if ! command -v chezmoi >/dev/null; then
+    echo "Installing chezmoi..."
+    sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:yourusername/dotfiles.git
+else
+    echo "chezmoi already installed, applying configuration..."
+    chezmoi apply
+fi
+
+# miseのインストール
+if ! command -v mise >/dev/null; then
+    echo "Installing mise..."
+    curl https://mise.run | sh
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Oh My Zshのインストール
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || true
+fi
+
+echo "Setup complete! Please restart your terminal or run 'source ~/.zshrc'"
+echo "You may also need to log out and back in for the shell change to take effect."
