@@ -38,7 +38,7 @@ fi
 # chezmoiのインストールと適用
 if ! command -v chezmoi >/dev/null; then
   echo "Installing chezmoi..."
-  sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:KeigoNakano/chezmoi.git
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:KeigoNakano/dotfiles.git
 else
   echo "chezmoi already installed, applying configuration..."
   chezmoi apply
