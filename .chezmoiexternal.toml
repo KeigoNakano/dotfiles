@@ -1,13 +1,3 @@
-# Mise本体
-[".local/bin/mise"]
-    type = "file"
-    {{- $os := .chezmoi.os }}
-    {{- if eq .chezmoi.os "darwin" }}
-    {{-   $os = "macos" }}
-    {{- end }}
-    url = {{ gitHubLatestReleaseAssetURL "jdx/mise" (printf "mise-*-%s-%s" $os .chezmoi.arch) | quote }}
-    executable = true
-
 # LazyVim
 [".config/nvim"]
 type = "archive"
