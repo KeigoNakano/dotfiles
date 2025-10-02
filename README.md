@@ -1,3 +1,6 @@
+ToDo
+- [ ] miseでfzfをインストールしているので、zshのpluginsにあるfzfは削除したほうがよいかも。→fzf-tabは？
+
 ## Dockerコンテナへの反映方法
 SSH Agentにソケット通信使うことで、本レポジトリがprivateでもコンテナからセキュアにクローンできるようにする。
 1. Dockerコンテナを立ち上げる。
