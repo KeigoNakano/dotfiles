@@ -35,6 +35,19 @@ if command -v zsh >/dev/null && [[ "$SHELL" != "$(command -v zsh)" ]]; then
   chsh -s "$(command -v zsh)" "$(whoami)"
 fi
 
+# miseのインストール
+if ! command -v mise >/dev/null; then
+  echo "Installing mise..."
+  curl https://mise.run | sh
+  export PATH="$HOME/.local/bin:$PATH"
+  # miseがPATHに追加されたことを確認
+  if command -v mise >/dev/null; then
+    echo "mise installed successfully"
+  else
+    echo "mise installation may have failed, but continuing..."
+  fi
+fi
+
 # chezmoiのインストールと適用
 if ! command -v chezmoi >/dev/null; then
   echo "Installing chezmoi..."
@@ -43,14 +56,6 @@ else
   echo "chezmoi already installed, applying configuration..."
   chezmoi apply
 fi
-
-# miseのインストール
-if ! command -v mise >/dev/null; then
-  echo "Installing mise..."
-  curl https://mise.run | sh
-fi
-
-export PATH="$HOME/.local/bin:$PATH"
 
 # Oh My Zshのインストール
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
