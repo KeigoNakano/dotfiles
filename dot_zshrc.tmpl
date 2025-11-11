@@ -85,8 +85,6 @@ plugins=(
 	git
 	zsh-autosuggestions
 	autojump
-	fzf
-    fzf-tab
     zsh-vi-mode
     )
 
@@ -201,3 +199,8 @@ if [[ "$TERM" == "xterm" ]]; then
     export TERM=xterm-256color
 fi
 
+export PATH=$HOME/bin:$PATH
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+fi
