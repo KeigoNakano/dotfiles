@@ -81,14 +81,6 @@ export KEYTIMEOUT=1 # make switching between modes faster
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-	git
-	zsh-autosuggestions
-	enable-fzf-tab
-    zsh-vi-mode
-    )
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -160,6 +152,14 @@ fi
 
 eval "$(mise activate zsh)"
 export BAT_THEME="Monokai Extended"
+
+plugins=(
+	git
+	zsh-autosuggestions
+    fzf-tab
+    )
+
+source $ZSH/oh-my-zsh.sh
 
 # ファイルタイプ別の色設定（OS別対応）
 {{ if eq .chezmoi.os "darwin" -}}
