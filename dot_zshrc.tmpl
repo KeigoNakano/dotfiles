@@ -132,9 +132,10 @@ eval "$(mise activate zsh)"
 export BAT_THEME="Monokai Extended"
 
 plugins=(
-	git
+    git
 	zsh-autosuggestions
     fzf-tab
+    ssh-agent
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -170,12 +171,6 @@ eval "$(zoxide init zsh)"
 # Docker環境で色の表現数が少ないせいで補完がグレーに表示されない問題を解消
 if [[ "$TERM" == "xterm" ]]; then
     export TERM=xterm-256color
-fi
-
-export PATH=$HOME/bin:$PATH
-if [ -z "$SSH_AUTH_SOCK" ]; then
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_ed25519
 fi
 
 # alias
